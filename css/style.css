@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+
+/**
+ * Différence entre * et body
+ * body applique les propriétés sur la balise <body> (racine du corp HTML)
+ * et * applique sur tous les éléments, cela permet de redéfinir des propriété
+ * qui pourrait être défini par le navigateur
+ */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #6359cd;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#invader {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /**
+     * CSS3 dispose de la très puissante fonction calc qui permet de faire des opération
+     * même avec des unités différentes : calc(100% - 64px)
+     * https://developer.mozilla.org/fr/docs/Web/CSS/calc
+     */
+    width: calc(8 * 25px);
+
+}
+
+.pixel {
+    background-color: #FAFAFA;
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgba(0, 0, 0, .51);
+}
