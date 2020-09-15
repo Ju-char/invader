@@ -20,7 +20,7 @@ body {
     background-color: #6359cd;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -33,7 +33,7 @@ body {
      * même avec des unités différentes : calc(100% - 64px)
      * https://developer.mozilla.org/fr/docs/Web/CSS/calc
      */
-    width: calc(8 * 25px);
+    /*width: calc(8 * 25px);*/
 
 }
 
@@ -47,4 +47,27 @@ body {
 
 .bg-black {
     background-color: rgba(0, 0, 0, .87);
+}
+
+.configuration {
+    background-color: rgba(0, 0, 0, .12 );
+    height: 128px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    margin-bottom: 64px;
+
+}
+
+.submit-button {
+    margin-left: 32px;
+}
+
+#grid-size-input {
+    width: 64px;
 }
