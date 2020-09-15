@@ -4,6 +4,7 @@
 // Etape 3 - Laisser l'utilisateur choisir la taille de la grille
 // Bonus 1 - Refactoriser sous forme de module tt notre code
 // Bonus 2 - Ajouter un champ pour gérer la cellSize
+// Bonus 3 - La palette
 
 var app = {
     gameBoard: null,
@@ -13,6 +14,15 @@ var app = {
     cellSizeInput: null,
 
     cellSize: 25,
+
+    styles: [
+        'plain',
+        'empty',
+        'light',
+        'highlight',
+    ],
+
+    selectedStyle: 'plain',
 
     drawGrid: function (gridSize) {
 
@@ -56,7 +66,7 @@ var app = {
         // Etape 2.3 : Sur cette cellule, s'il n'y a rien je met la classe bg-black
         //             s'il y a la classe je l'enlève
         //
-        cell.classList.toggle('bg-black');
+        cell.setAttribute('data-style-name', app.selectedStyle);
 
         // classList.toggle correspond au comportement suivant :
         // if (cell.classList.contains('bg-black')) {
@@ -159,9 +169,34 @@ var app = {
         formNode.addEventListener('submit', app.onFormSumbit);
     },
 
+    onClickOnPaletteChoice: function (event) {
+        app.selectedStyle = event.target.getAttribute('data-style-name');
+        console.log('Selected style :', selectedStyle);
+    },
+
+    generatePalette: function () {
+        var paletteNode = document.getElementById('palette');
+
+        // En JS les Array dispose d'une méthode spéciale :
+        // forEach elle prend en paramètre un callback (qui a lui même un paramètre)
+        // Le callback sera appelé pour chaque élément dans la liste
+        // et chaque sont paramètre prendra la valeur d'un des éléments
+        app.styles.forEach(function (style) {
+            var paletteChoiceNode = document.createElement('div');
+            paletteChoiceNode.classList.add('palette-choice');
+            paletteChoiceNode.setAttribute('data-style-name', style);
+            // équivaut à
+            // paletteChoiceNode.dataset.styleName = style
+
+            paletteChoiceNode.addEventListener('click', app.onClickOnPaletteChoice);
+            paletteNode.appendChild(paletteChoiceNode);
+        });
+    },
+
     init: function () {
         app.gameBoard = document.getElementById('invader');
         app.generateForm();
+        app.generatePalette();
         app.drawGrid(8);
     }
 };

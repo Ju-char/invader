@@ -43,8 +43,17 @@ body {
     cursor: pointer;
 }
 
-.bg-black {
+[data-style-name="plain"] {
     background-color: rgba(0, 0, 0, .87);
+}
+[data-style-name="empty"] {
+    background-color: #FAFAFA;
+}
+[data-style-name="light"] {
+    background-color: #fbc048;
+}
+[data-style-name="highlight"] {
+    background-color: #79ea83;
 }
 
 .configuration {
@@ -68,4 +77,28 @@ body {
 
 #grid-size-input, #cell-size-input {
     width: 64px;
+}
+
+#palette {
+    height: 64px;
+
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 180px;
+    background-color: rgba(0, 0, 0, .51);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+
+}
+
+.palette-choice {
+    border-radius: 50%;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
 }
