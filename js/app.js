@@ -3,13 +3,16 @@
 // Etape 2 - Réagir au clic sur une cellule
 // Etape 3 - Laisser l'utilisateur choisir la taille de la grille
 // Bonus 1 - Refactoriser sous forme de module tt notre code
+// Bonus 2 - Ajouter un champ pour gérer la cellSize
 
 var app = {
     gameBoard: null,
 
     gridSizeInput: null,
 
-    CELL_SIZE: 25,
+    cellSizeInput: null,
+
+    cellSize: 25,
 
     drawGrid: function (gridSize) {
 
@@ -24,7 +27,7 @@ var app = {
         // en fonction de la largeur d'une cellule.
         // Si je veux un carré de X cellules de coté il faut que la largeur de la
         // gameboard soit de X * 25 (25 est la largeur d'une cellule)
-        app.gameBoard.style.width = app.CELL_SIZE * gridSize + 'px';
+        app.gameBoard.style.width = app.cellSize * gridSize + 'px';
 
         // Etape 1.2 - "Boucler" 8x8 fois
         var nbCellules = gridSize * gridSize;
@@ -34,6 +37,10 @@ var app = {
             var cell = document.createElement('div');
             cell.classList.add('pixel');
             app.gameBoard.appendChild(cell);
+
+            // B2 - On se sert de app.cellSize pour définir la width et la height
+            cell.style.width = app.cellSize + 'px';
+            cell.style.height = app.cellSize + 'px';
 
             // Etape 2.1 : Je veux réagir au clic sur chaque cellule
             cell.addEventListener('click', app.onClickOnPixel);
@@ -67,6 +74,7 @@ var app = {
         // la page, ce qui nous bloquerais. On annule ça grace à cette ligne
         event.preventDefault();
 
+
         // Etape 3.3 - Générer une nouvelle grille
         // Etape 3.3.1 - Obtenir la taille de grille souhaité
         var newGridSize = app.gridSizeInput.value;
@@ -82,6 +90,10 @@ var app = {
         while (app.gameBoard.firstChild) {
             app.gameBoard.removeChild(app.gameBoard.firstChild);
         }
+
+        // B2 - Avant de dessiner la grille on récupère la nouvelle cellSize
+        //      que l'on enregistre dans l'objet
+        app.cellSize = app.cellSizeInput.value;
 
         // Etape 3.3.3 - Dessiner la nouvelle grille à cette taille
         app.drawGrid(newGridSize);
@@ -110,6 +122,18 @@ var app = {
         app.gridSizeInput.id = 'grid-size-input';
 
         formNode.appendChild(app.gridSizeInput);
+
+        // B2 - Dans mon formulaire je veux ajouter un second input
+        // Cela ressemble très très fortement à 3
+        // Je peux très facilement partir du code existant
+        app.cellSizeInput = document.createElement('input');
+        app.cellSizeInput.setAttribute('type', 'number');
+        app.cellSizeInput.setAttribute('min', '1');
+        app.cellSizeInput.value = app.cellSize;
+
+        app.cellSizeInput.id = 'cell-size-input';
+
+        formNode.appendChild(app.cellSizeInput);
 
         // Cet élément peut être soit un <input> soit un <button> le résultat est le même
         var submitButton = document.createElement('input');

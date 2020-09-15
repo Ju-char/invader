@@ -39,8 +39,6 @@ body {
 
 .pixel {
     background-color: #FAFAFA;
-    width: 25px;
-    height: 25px;
     border: 1px solid rgba(0, 0, 0, .51);
     cursor: pointer;
 }
@@ -68,6 +66,6 @@ body {
     margin-left: 32px;
 }
 
-#grid-size-input {
+#grid-size-input, #cell-size-input {
     width: 64px;
 }
